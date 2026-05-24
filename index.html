@@ -1,14 +1,83 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pucaru</title>
-    <link rel="stylesheet" href="styles.css">
     <link rel="shortcut icon" href="/image/heart.ico" type="image/x-icon">
+
+    <!-- Pico.css (MIT) https://picocss.com -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Pucaru</h1>
-    <p>Hi im Pucaru</p>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">
+        <span class="icon-sun">☀</span>
+        <span class="icon-moon">☾</span>
+    </button>
+
+    <div class="paw paw-1" aria-hidden="true">🐾</div>
+    <div class="paw paw-2" aria-hidden="true">🐾</div>
+    <div class="paw paw-3" aria-hidden="true">🐾</div>
+
+    <div class="page">
+        <header class="site-header">
+            <h1 class="site-title"><a href="/">pucaru</a></h1>
+            <nav class="site-nav">
+                <a href="#posts">posts</a>
+                <a href="#about">about</a>
+                <a href="#">rss</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="about" class="about">
+                <h2 class="section-title">about</h2>
+                <p>hi — i'm pucaru.</p>
+            </section>
+
+            <section id="posts" class="posts">
+                <h2 class="section-title">recent posts</h2>
+
+                <article class="post-item">
+                    <time datetime="2026-05-24">May 24, 2026</time>
+                    <h3><a href="#">hello, world</a></h3>
+                    <p>hello world</p>
+                </article>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <small>
+                © <span id="year">2026</span> Pucaru ·
+                styled with <a href="https://picocss.com" target="_blank" rel="noopener">Pico.css</a>
+            </small>
+        </footer>
+    </div>
+
+    <script>
+        (function () {
+            const root = document.documentElement;
+            const btn = document.getElementById('theme-toggle');
+            const stored = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const initial = stored || (prefersDark ? 'dark' : 'light');
+            root.setAttribute('data-theme', initial);
+
+            btn.addEventListener('click', () => {
+                const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                root.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+            });
+
+            document.getElementById('year').textContent = new Date().getFullYear();
+        })();
+    </script>
 </body>
-</html
+</html>
